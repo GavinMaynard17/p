@@ -1,0 +1,53 @@
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: bold;
+  flex: 1; /* Allocate space for the logo */
+  margin-left: 5%;
+}
+
+.nav-links {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex: 1; /* Allocate equal space for the nav links */
+}
+
+/* Add an empty spacer to the right of nav-links to balance the space */
+.navbar-container::after {
+  content: "";
+  flex: 1;
+  margin-right: 5%;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 15px;
+  position: relative;
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: red;
+  transition:
+    left 0.3s ease,
+    width 0.3s ease;
+}

@@ -1,0 +1,44 @@
+.home-container {
+    text-align: center;
+    margin-top: 50px;
+
+    h2 {
+        font-family: "Courier New", monospace;
+        font-size: 24px;
+        margin-bottom: 20px;
+        position: relative;
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 20px;
+            background-color: black;
+            animation: blink 0.8s infinite;
+        }
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        p {
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+}
