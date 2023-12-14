@@ -1,10 +1,10 @@
 import React from 'react';
+import './Project.scss';
 
-const Project = () => {
+const Project = (project) => {
   return (
-    <div>
-      <h2>Project component</h2>
-      {/* Your about content goes here */}
+    <div className='project-wrapper'>
+      
     </div>
   );
 };

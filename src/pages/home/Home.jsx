@@ -1,21 +1,129 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Home.scss';
+import Skill from '../../components/skill/Skill';
+import { skills } from '../../data/data';
 
 const Home = () => {
   const [typedText, setTypedText] = useState('');
+  const [typingFinished, setTypingFinished] = useState(false);
+  const [animationInProgress, setAnimationInProgress] = useState(true);
+  const contentEditableRef = useRef(null);
+
+  const moveCursorToEnd = () => {
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(contentEditableRef.current);
+    range.collapse(false);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  };
+
+
+
+  const handleUserInput = () => {
+    if (typingFinished) {
+      let newText = typedText; // Declare newText outside the if statement
+      const containerWidth = contentEditableRef.current.offsetWidth;
+      const textWidth = contentEditableRef.current.scrollWidth;
+
+      if (textWidth > containerWidth) {
+        // Text exceeds container width
+        const words = newText.split(' ');
+        words.pop(); // Remove the last word
+        newText = words.join(' ');
+
+        setTypedText(newText);
+        moveCursorToEnd();
+      }
+
+      if (textWidth > containerWidth && newText.trim() === '') {
+        // No original text left, move cursor down
+        setTypedText('');
+        moveCursorDown();
+      }
+    }
+  };
+
+  const moveCursorDown = () => {
+    setTypedText((prevText) => prevText + '\n'); // Start a new line
+    moveCursorToEnd();
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!animationInProgress) {
+        setTypedText('');
+        setAnimationInProgress(true);
+        setTypingFinished(false);
+
+        // Restart the typing animation
+        const greeting = "  Hi!";
+        const myName = ", I'm Gavin!";
+        let index = 0;
+        const timerIds = [];
+
+        const typeText = () => {
+          if (index < greeting.length) {
+            setTypedText((prevText) => prevText + greeting.charAt(index));
+            index += 1;
+            timerIds.push(setTimeout(typeText, 150)); // Adjust the typing speed here
+          } else if (index === greeting.length) {
+            timerIds.push(setTimeout(() => eraseExclamation(), 1500)); // Pause before erasing exclamation
+          } else {
+            typeMyName();
+          }
+        };
+
+        const eraseExclamation = () => {
+          setTypedText((prevText) => prevText.slice(0, -1));
+          index -= 1;
+          timerIds.push(setTimeout(() => typeMyName(), 1300)); // Adjust the pause before typing myName
+        };
+
+        const typeMyName = () => {
+          const myNamePart1 = ", I'";
+
+          if (index < greeting.length + myNamePart1.length) {
+            setTypedText((prevText) => prevText + myName.charAt(index - greeting.length));
+            index += 1;
+            timerIds.push(setTimeout(() => typeMyName(), 150)); // Adjust the typing speed for the first part
+          } else if (index < greeting.length + myName.length - 3) {
+            setTypedText((prevText) => prevText + myName.charAt(index - greeting.length));
+            index += 1;
+            timerIds.push(setTimeout(() => typeMyName(), 75)); // Adjust the typing speed for the second part
+          } else if (index < greeting.length + myName.length) {
+            setTypedText((prevText) => prevText + myName.charAt(index - greeting.length));
+            index += 1;
+            const randomDelay = Math.floor(Math.random() * (2500 - 150 + 1)) + 150; // Generate random delay between 150 and 2500
+            timerIds.push(setTimeout(() => {
+              setTypingFinished(true);
+              setAnimationInProgress(false);
+              contentEditableRef.current && contentEditableRef.current.focus();
+              contentEditableRef.current && moveCursorToEnd();
+              typeMyName();
+            }, randomDelay));
+          }
+        };
+
+        timerIds.push(setTimeout(() => typeText(), 1000)); // Initial delay before starting the typing effect
+      }
+    }
+  };
 
   useEffect(() => {
     const greeting = "H i!";
     const myName = ", I'm Gavin!";
     let index = 0;
+    const timerIds = [];
 
     const typeText = () => {
       if (index < greeting.length) {
         setTypedText((prevText) => prevText + greeting.charAt(index));
         index += 1;
-        setTimeout(typeText, 150); // Adjust the typing speed here
+        timerIds.push(setTimeout(() => typeText(), 150)); // Adjust the typing speed here
       } else if (index === greeting.length) {
-        setTimeout(() => eraseExclamation(), 1500); // Pause before erasing exclamation
+        timerIds.push(setTimeout(() => eraseExclamation(), 1500)); // Pause before erasing exclamation
       } else {
         typeMyName();
       }
@@ -24,40 +132,70 @@ const Home = () => {
     const eraseExclamation = () => {
       setTypedText((prevText) => prevText.slice(0, -1));
       index -= 1;
-      setTimeout(() => typeMyName(), 1300); // Adjust the pause before typing myName
+      timerIds.push(setTimeout(() => typeMyName(), 1300)); // Adjust the pause before typing myName
     };
 
     const typeMyName = () => {
       const myNamePart1 = ", I'";
-      
+
       if (index < greeting.length + myNamePart1.length) {
         setTypedText((prevText) => prevText + myName.charAt(index - greeting.length));
         index += 1;
-        setTimeout(typeMyName, 150); // Adjust the typing speed for the first part
-      } else if (index < greeting.length + myName.length-3) {
+        timerIds.push(setTimeout(() => typeMyName(), 150)); // Adjust the typing speed for the first part
+      } else if (index < greeting.length + myName.length - 3) {
         setTypedText((prevText) => prevText + myName.charAt(index - greeting.length));
         index += 1;
-        setTimeout(typeMyName, 75); // Adjust the typing speed for the second part
+        timerIds.push(setTimeout(() => typeMyName(), 75)); // Adjust the typing speed for the second part
       } else if (index < greeting.length + myName.length) {
         setTypedText((prevText) => prevText + myName.charAt(index - greeting.length));
         index += 1;
         const randomDelay = Math.floor(Math.random() * (2500 - 150 + 1)) + 150; // Generate random delay between 150 and 2500
-        setTimeout(typeMyName, randomDelay);
+        timerIds.push(setTimeout(() => {
+          setTypingFinished(true);
+          setAnimationInProgress(false);
+          contentEditableRef.current && contentEditableRef.current.focus();
+          contentEditableRef.current && moveCursorToEnd();
+          typeMyName();
+        }, randomDelay));
       }
     };
 
-    setTimeout(() => typeText(), 1000); // Initial delay before starting the typing effect
+    timerIds.push(setTimeout(() => typeText(), 1000)); // Initial delay before starting the typing effect
 
-  }, []);
+    // Add event listener for keydown
+    if (contentEditableRef.current) {
+      contentEditableRef.current.addEventListener('keydown', handleKeyDown);
+    }
+
+    // Cleanup the event listener and timers on component unmount
+    return () => {
+      if (contentEditableRef.current) {
+        contentEditableRef.current.removeEventListener('keydown', handleKeyDown);
+      }
+      timerIds.forEach((id) => clearTimeout(id));
+    };
+
+  }, [contentEditableRef]); // Add contentEditableRef to the dependency array
 
   return (
     <div className="home-container">
-      <h2>{typedText}<span className="cursor"></span></h2>
+      <h2>
+        <span ref={contentEditableRef} contentEditable={typingFinished} onInput={handleUserInput} onKeyDown={handleKeyDown}>
+          {typedText}
+        </span>
+        <span className="cursor"></span>
+      </h2>
       <div className="content">
         <p>
-          Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+          I am a Software Developer from southern Kentucky. I graduated from Western Kentucky University in December of 2023 with a Bachelor's Degree of Science, with a Major in Computer Science and a Minor in Computer Information Systems. I love testing myself and pushing myself to higher limits with the applications I create. Throughout all of my projects, I really enjoy backend development mainly because I like working in OOP designs and watching as data moves around the application.
         </p>
-        <img src="your-image-path.jpg" alt="Your Name" className="profile-image" />
+        <img src="your-image-path.jpg" alt="This is me" className="profile-image" />
+        <h2>Skills</h2>
+        <div className='skills-wrapper'>
+          {skills.map((skill) => 
+            <Skill image={skill.image} name={skill.name}/>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,29 @@
+.projects-container {
+    text-align: center;
+
+    h2 {
+        font-family: "Courier New", monospace;
+        font-size: 24px;
+        margin-bottom: 20px;
+        position: relative;
+
+        span[contentEditable="true"] {
+            outline: none;
+            caret-color: transparent; // Hide the real cursor
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 20px;
+            background-color: black;
+            animation: blink 0.8s infinite;
+        }
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+}

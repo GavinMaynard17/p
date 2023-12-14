@@ -43,7 +43,7 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-container">
           <Link to="/" className="logo-link">
-            Your Logo
+            Gavin Maynard
           </Link>
           <div className="nav-links">
             {['/', '/about', '/projects', '/contact'].map((path, index) => (

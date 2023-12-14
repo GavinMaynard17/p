@@ -1,0 +1,24 @@
+.skill-container {
+    width: 95px;
+    height: 95px;
+    border-radius: 10px;
+    margin: 4%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center both horizontally and vertically */
+    padding: 8px;
+}
+
+.skill-image {
+    max-width: 65px;
+    max-height: 65px;
+    border-radius: 10px;
+    margin-top: 23px;
+    margin-bottom: -10px;
+}
+
+p {
+    text-align: center;
+}
