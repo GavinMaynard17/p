@@ -9,6 +9,7 @@ const Projects = () => {
   const [animationInProgress, setAnimationInProgress] = useState(true);
   const contentEditableRef = useRef(null);
   const pauseDuration = 1500; // Adjust the pause duration after hitting Enter
+  const [selectedSkill, setSelectedSkill] = useState(null);
 
   const handleUserInput = () => {
     if (typingFinished) {
@@ -84,6 +85,19 @@ const Projects = () => {
     }
   };
 
+  const handleSkillClick = (skill) => {
+    setSelectedSkill(skill);
+  };
+
+  const handleClearFilter = () => {
+    setSelectedSkill(null);
+  };
+
+  const filteredProjects = selectedSkill
+    ? projects.filter((project) => project.skills.includes(selectedSkill))
+    : projects;
+
+
   useEffect(() => {
     // Start typing "About me!" when the component mounts
     const aboutText = "P rojects!";
@@ -129,12 +143,33 @@ const Projects = () => {
         <span className="cursor"></span>
       </h2>
 
-      <div className='projects-wrapper'>
-        {projects.map((project) => 
-          <Project project={project}/>
+
+      <div className='content'>
+        <div className="projects-wrapper">
+          {filteredProjects.map((project) => (
+            <Project
+              key={project.title}
+              project={project}
+              onSkillClick={handleSkillClick}
+              isFiltered={selectedSkill !== null}
+            />
+          ))}
+        </div>
+        <div className="filter-section">
+        {selectedSkill && (
+          <div className="filter-indicator">
+            Projects with: {selectedSkill}
+            <button className="clear-filter" onClick={handleClearFilter}>
+              Clear Filter
+            </button>
+          </div>
         )}
       </div>
+      </div>
+
+
     </div>
+    
   );
 };
 

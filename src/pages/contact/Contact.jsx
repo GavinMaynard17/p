@@ -166,25 +166,26 @@ const Contact = () => {
         </span>
         <span className="cursor"></span>
       </h2>
-
+      <p>This form does not work at the moment, feel free to email me at</p>
+      <h2>gavinmaynard.dev@gmail.com</h2>
       {!formSubmitted ? (
         <form onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} disabled/>
           </label>
           <br />
           <label>
             Email:
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled/>
           </label>
           <br />
           <label>
             Message:
-            <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
+            <textarea value={message} onChange={(e) => setMessage(e.target.value)} disabled/>
           </label>
           <br />
-          <button type="submit">Submit</button>
+          <button type="submit" disabled>Submit</button>
         </form>
       ) : (
         <h2>Thank you for your submission!</h2>

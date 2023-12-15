@@ -126,6 +126,9 @@ const About = () => {
         </span>
         <span className="cursor"></span>
       </h2>
+
+      <p>I am working on filling this out. Check back later!</p>
+      <h1>:)</h1>
     </div>
   );
 };
