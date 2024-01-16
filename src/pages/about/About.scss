@@ -1,5 +1,7 @@
 .about-container {
     text-align: center;
+    padding-left: 25%;
+    padding-right: 25%;
 
     h2 {
         font-family: "Courier New", monospace;
@@ -19,6 +21,54 @@
             background-color: black;
             animation: blink 0.8s infinite;
         }
+    }
+
+    .info-container .section {
+        display: flex;
+        justify-content: space-between;
+        gap: 25px;
+        align-items: center;
+        margin-bottom: 20px;
+
+        // Add specific styling for each section if necessary
+
+        @media (max-width: 1150px) {
+            flex-direction: column; // Change to column layout on smaller screens
+            text-align: center;
+
+            img {
+                margin-top: 20px; // Add some spacing between text and image
+                order: 1; // Move the image below the text
+            }
+        }
+    }
+
+    .personal-text,
+    .professional-text,
+    .college-text {
+        max-width: 60%; /* Adjust as needed */
+
+        @media (max-width: 768px) {
+            max-width: 100%; // Use full width on smaller screens
+        }
+    }
+
+    img {
+        max-height: 350px;
+        border-radius: 3%;
+        outline: 2px solid #333;
+
+        @media (max-width: 768px) {
+            order: -1; // Move the image above the text on smaller screens
+        }
+    }
+
+    p {
+        text-align: left;
+    }
+
+    h1 {
+        text-align: left;
     }
 
     @keyframes blink {
