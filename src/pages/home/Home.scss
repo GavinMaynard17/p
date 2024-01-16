@@ -39,6 +39,13 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
+
+            @media (max-width: 768px) {
+                // Hide the smiley face when the screen size is 768px or smaller
+                h1 {
+                    display: none;
+                }
+            }
         }
 
         p {
@@ -51,6 +58,12 @@
         h1 {
             margin-left: 15%;
             font-size: 70px;
+
+            @media (max-width: 768px) {
+                // Adjust the margin and font size for smaller screens
+                margin-left: 0;
+                font-size: 50px;
+            }
         }
 
         .profile-image {
