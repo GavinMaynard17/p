@@ -184,9 +184,13 @@ const Home = () => {
         <span className="cursor"></span>
       </h2>
       <div className="content">
-        <p>
-          I am a Software Developer from southern Kentucky. I graduated from Western Kentucky University in December of 2023 with a Bachelor's Degree of Science, with a Major in Computer Science and a Minor in Computer Information Systems. I love testing myself and pushing myself to higher limits with the applications I create. Throughout all of my projects, I really enjoy backend development mainly because I like working in OOP designs and watching as data moves around the application.
-        </p>
+        <div className='text'>
+          <p>
+            I am a Software Developer from southern Kentucky. I graduated from Western Kentucky University in December of 2023 with a Bachelor's Degree of Science, with a Major in Computer Science and a Minor in Computer Information Systems. I love testing myself and pushing myself to higher limits with the applications I create. Throughout all of my projects, I really enjoy backend development mainly because I like working in OOP designs and watching as data moves around the application.
+          </p>
+          <h1>:)</h1>
+        </div>
+        
         {/* <img src="your-image-path.jpg" alt="This is me" className="profile-image" /> */}
         <h2>Skills</h2>
         <div className='skills-wrapper'>

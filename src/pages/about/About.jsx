@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './About.scss';
+import { images } from '../../data/data';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   const [typedText, setTypedText] = useState('');
@@ -127,8 +129,36 @@ const About = () => {
         <span className="cursor"></span>
       </h2>
 
-      <p>I am working on filling this out. Check back later!</p>
-      <h1>:)</h1>
+      <div className='info-container'>
+
+        {/* Personal Section */}
+        <div className='section personal-content'>
+          <div className='personal-text'>
+            <h1 className='header-personal'>Personal</h1>
+            <p className='text-personal'>I am from small-town Glasgow, Ky. I am 23 years old and I am married to my amazing, beautiful wife, Briana.</p>
+          </div>
+          <img className='pic-personal' src={images[0]} alt='me' />
+        </div>
+
+        {/* Professional Section */}
+        <div className='section professional-content'>
+          <img className='pic-grad' src={images[1]} alt='me' />
+          <div className='professional-text'>
+            <h1 className='header-grad'>Professional</h1>
+            <p className='text-grad'>I am currently looking for a job that will help me put my degree to use! That would entail any software developer/engineer role, any data analyst position, or any IT related position. Feel free to reach out to me via email at gavinmaynard.dev@gmail.com if you would be interested in working with me! Hope to hear from you soon!</p>
+          </div>
+        </div>
+
+        {/* Time at College Section */}
+        <div className='section college-content'>
+          <div className='college-text'>
+            <h1 className='header-college'>Time at college</h1>
+            <p className='text-college'>I graduated college in December of 2023. I spent my time at college studying away and attempting to better myself each day. I also had the pleasure in playing Esports for WKUEsports. Without it I likely would not have been able to put myself through college. I met some amazing people throughout my time at WKU whether that be through my classes, Esports, or pure chance. It was an experience that has made me a better person, and I would gladly do it all again if given the chance.</p>
+          </div>
+          <img className='pic-college' src={images[2]} alt='me' />
+        </div>
+
+      </div>
     </div>
   );
 };

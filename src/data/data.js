@@ -132,3 +132,9 @@ export const projects = [
     //     link: ''
     // }
 ]
+
+export const images = [
+    '/me.JPG',
+    '/grad.JPG',
+    '/esportscopy.png'
+];

@@ -3,6 +3,7 @@
   color: #fff;
   padding: 20px 0;
   margin-bottom: 50px;
+  position: relative;
 }
 
 .navbar-container {
@@ -18,7 +19,7 @@
   color: #fff;
   font-size: 1.5em;
   font-weight: bold;
-  flex: 1; /* Allocate space for the logo */
+  flex: 1;
   margin-left: 5%;
 }
 
@@ -26,10 +27,9 @@
   position: relative;
   display: flex;
   justify-content: center;
-  flex: 1; /* Allocate equal space for the nav links */
+  flex: 1;
 }
 
-/* Add an empty spacer to the right of nav-links to balance the space */
 .navbar-container::after {
   content: "";
   flex: 1;
@@ -51,4 +51,53 @@
   transition:
     left 0.3s ease,
     width 0.3s ease;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5em;
+  cursor: pointer;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10; // Ensure the button is above other elements
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  right: 5%;
+  top: 60px;
+  z-index: 1000;
+
+  a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #444;
+    }
+  }
+}
+
+// Media Query for Small Screens
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .dropdown-menu {
+    display: block;
+  }
 }
