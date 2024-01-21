@@ -164,8 +164,6 @@ const Contact = () => {
         </span>
         <span className="cursor"></span>
       </h2>
-      <p>This form does not work at the moment, feel free to email me at</p>
-      <h2>gavinmaynard.dev@gmail.com</h2>
       {!formSubmitted ? (
         <form onSubmit={handleSubmit}>
           <label>
