@@ -85,7 +85,11 @@ const Contact = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const isFormValid = () => {
+    return name.trim() !== '' && email.trim() !== '' && message.trim() !== '';
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Gather user input
@@ -95,16 +99,9 @@ const Contact = () => {
       message,
     };
 
-    // Send email (you need to implement this part on the server side)
-    sendEmail(userData);
-
-    // Update state to indicate form submission
-    setFormSubmitted(true);
-  };
-
-  const sendEmail = async (userData) => {
     try {
-      const response = await fetch('/api/send-email', {//change the api thing for actual emailing
+      // Use the Getform endpoint for form submission
+      const response = await fetch('https://getform.io/f/d860b137-186f-4b81-a2de-12cf44f81848', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -113,12 +110,13 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        console.log('Email sent successfully!');
+        console.log('Form submitted successfully!');
+        setFormSubmitted(true);
       } else {
-        console.error('Failed to send email.');
+        console.error('Failed to submit form.');
       }
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Error submitting form:', error);
     }
   };
 
@@ -172,20 +170,22 @@ const Contact = () => {
         <form onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} disabled/>
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
           </label>
           <br />
           <label>
             Email:
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled/>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </label>
           <br />
           <label>
             Message:
-            <textarea value={message} onChange={(e) => setMessage(e.target.value)} disabled/>
+            <textarea value={message} onChange={(e) => setMessage(e.target.value)} required />
           </label>
           <br />
-          <button type="submit" disabled>Submit</button>
+          <button type="submit" disabled={!isFormValid()}>
+            Submit
+          </button>
         </form>
       ) : (
         <h2>Thank you for your submission!</h2>
