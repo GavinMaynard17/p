@@ -32,7 +32,7 @@ export const skills = [
         name: 'CSS'
     },
     {
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-plain.svg',
+        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg',
         name: 'MySQL'
     },
 
@@ -131,6 +131,48 @@ export const projects = [
     //     skills: [],
     //     link: ''
     // }
+]
+
+export const apps = [
+    {
+        key: 0,
+        name: 'Bracket Buddy',
+        image: '/logo.png',
+        link: 'bracket-buddy',
+        description: 'Simple bracket tool to help you find your favorite thing!',
+        progress: 'In development'
+    },
+    {
+        key: 1,
+        name: 'Simple Weather',
+        image: '/logo.png',
+        link: 'simple-weather',
+        description: "Simple weather app, showing you the weather in Gavin's hometown!",
+        progress: 'Planned'
+    },
+    {
+        key: 2,
+        name: 'Password Pal',
+        image: '/logo.png',
+        link: 'password-pal',
+        description: 'A tool to help you generate a nice, safe password. No matter the requirements!',
+        progress: 'Planned'
+    },
+    {
+        key: 3,
+        name: 'Rocket League Comparison',
+        image: '/logo.png',
+        link: 'rl-comparision',
+        description: 'Compare your Rocket League stats to mine to find out who the better player is!',
+        progress: 'Planned'
+    },
+    // {
+    //     key: ,
+    //     name: '',
+    //     link: '',
+    //     description: '',
+    //     progress: ''
+    // },
 ]
 
 export const images = [
