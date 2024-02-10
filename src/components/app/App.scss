@@ -1,0 +1,86 @@
+.app-box {
+    max-width: 350px;
+    margin: 2%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.app-box:hover {
+    transform: scale(1.05); /* Scale up by 10% on hover */
+    border: 1px solid #333;
+}
+
+.app-image {
+    width: 100%; /* Span across the whole component */
+    height: 197px;
+    max-height: 197px; /* 16:9 aspect ratio (350 * 9 / 16) */
+    object-fit: cover; /* Cut off the bottom to maintain aspect ratio */
+    border-radius: 10px 10px 0 0;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: -20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.app-box:hover .app-image {
+    transform: scale(1.05); /* Scale up by 10% on hover */
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border: 1px solid #333;
+}
+
+.app-details {
+    padding: 10px;
+}
+
+.app-description {
+    margin: 10px 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.skills-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.skill-rectangle {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.skill-rectangle:hover {
+    transform: scale(1.1); /* Scale up by 10% on hover */
+    border: 1px solid #333;
+}
+
+.app-link {
+    margin-top: 10px;
+}
+
+.app-link a {
+    text-decoration: none;
+    color: red;
+}
+
+.app-link:hover a {
+    text-decoration: underline;
+    color: red;
+}
+
+.app-link p {
+    color: #888;
+}

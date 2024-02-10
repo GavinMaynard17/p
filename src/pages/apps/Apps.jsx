@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Projects.scss';
-import Project from '../../components/project/Project';
-import { projects } from '../../data/data';
+import './Apps.scss';
+import { apps } from '../../data/data';
+import App from '../../components/app/App';
 
-const Projects = () => {
+const Apps = () => {
   const [typedText, setTypedText] = useState('');
   const [typingFinished, setTypingFinished] = useState(false);
   const [animationInProgress, setAnimationInProgress] = useState(true);
   const contentEditableRef = useRef(null);
   const pauseDuration = 1500; // Adjust the pause duration after hitting Enter
-  const [selectedSkill, setSelectedSkill] = useState(null);
 
   const handleUserInput = () => {
     if (typingFinished) {
@@ -60,7 +59,7 @@ const Projects = () => {
         contentEditableRef.current && (contentEditableRef.current.contentEditable = false);
 
         // Restart the typing animation after a brief pause
-        const aboutText = "  Projects!";
+        const aboutText = "  My apps!";
         let index = 0;
         const timerIds = [];
 
@@ -85,22 +84,8 @@ const Projects = () => {
     }
   };
 
-  const handleSkillClick = (skill) => {
-    setSelectedSkill(skill);
-  };
-
-  const handleClearFilter = () => {
-    setSelectedSkill(null);
-  };
-
-  const filteredProjects = selectedSkill
-    ? projects.filter((project) => project.skills.includes(selectedSkill))
-    : projects;
-
-
   useEffect(() => {
-    // Start typing "About me!" when the component mounts
-    const aboutText = "P rojects!";
+    const aboutText = "M y apps!";
     let index = 0;
     const timerIds = [];
 
@@ -135,42 +120,26 @@ const Projects = () => {
   }, [contentEditableRef]); // Add contentEditableRef to the dependency array
 
   return (
-    <div className="projects-container">
+    <div className="apps-container">
       <h2>
         <span ref={contentEditableRef} contentEditable={false} onInput={handleUserInput} onKeyDown={handleKeyDown}>
           {typedText}
         </span>
         <span className="cursor"></span>
       </h2>
-
-
       <div className='content'>
-        <div className="projects-wrapper">
-          {filteredProjects.map((project) => (
-            <Project
-              key={project.title}
-              project={project}
-              onSkillClick={handleSkillClick}
-              isFiltered={selectedSkill !== null}
-            />
-          ))}
-        </div>
-        <div className="filter-section">
-          {selectedSkill && (
-            <div className="filter-indicator">
-              Projects with: {selectedSkill}
-              <button className="clear-filter" onClick={handleClearFilter}>
-                Clear Filter
-              </button>
-            </div>
-          )}
-        </div>
+        <div className='apps-wrapper'>
+            {apps.map((app) => (
+                <App 
+                key={app.key}
+                app={app}
+                />
+            ))}
+        </div> 
       </div>
 
-
     </div>
-    
   );
 };
 
-export default Projects;
+export default Apps;

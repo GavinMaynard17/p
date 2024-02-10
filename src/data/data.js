@@ -180,3 +180,66 @@ export const images = [
     '/grad.JPG',
     '/esportscopy.png'
 ];
+
+export const teamFrom = [
+    {
+        team1From: 3,
+        team2From: 2
+    },//1
+    {
+        team1From: 5,
+        team2From: 4
+    },//2
+    {
+        team1From: 7,
+        team2From: 6
+    },//3
+    {
+        team1From: 9,
+        team2From: 8
+    },//4
+    {
+        team1From: 11,
+        team2From: 10
+    },//5
+    {
+        team1From: 13,
+        team2From: 12
+    },//6
+    {
+        team1From: 15,
+        team2From: 14
+    },//7
+    {
+        team1From: 17,
+        team2From: 16
+    },//8
+    {
+        team1From: 19,
+        team2From: 18
+    },//9
+    {
+        team1From: 21,
+        team2From: 20
+    },//10
+    {
+        team1From: 23,
+        team2From: 22
+    },//11
+    {
+        team1From: 25,
+        team2From: 24
+    },//12
+    {
+        team1From: 27,
+        team2From: 26
+    },//13
+    {
+        team1From: 29,
+        team2From: 28
+    },//14
+    {
+        team1From: 31,
+        team2From: 30
+    },//15
+]

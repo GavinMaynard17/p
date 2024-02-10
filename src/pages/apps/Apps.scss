@@ -1,0 +1,76 @@
+.apps-container {
+    text-align: center;
+
+    h2 {
+        font-family: "Courier New", monospace;
+        font-size: 24px;
+        margin-bottom: 50px;
+        position: relative;
+
+        span[contentEditable="true"] {
+            outline: none;
+            caret-color: transparent; // Hide the real cursor
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 20px;
+            background-color: black;
+            animation: blink 0.8s infinite;
+        }
+    }
+
+    .filter-section {
+        margin-top: 50px;
+
+        .filter-indicator {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 5px;
+            border-radius: 5px;
+
+            .clear-filter {
+                margin-left: 10px;
+                cursor: pointer;
+                border: none;
+                background: none;
+                color: blue;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .content {
+        max-width: 100%; // Allow content to take up full width within the container
+        padding: 0 20px; // Add some padding to the content
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .apps-wrapper {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        @media (min-width: 768px) {
+            /* Adjust the layout for larger screens (5 skills per row) */
+            max-width: 100%; /* Set a maximum width for better centering on larger screens */
+        }
+
+        @media (min-width: 1200px) {
+            /* Further adjust the layout for even larger screens */
+            max-width: 80%;
+        }
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+}
