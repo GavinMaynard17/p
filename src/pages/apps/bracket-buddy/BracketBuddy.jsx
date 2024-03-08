@@ -1,19 +1,55 @@
 import React, { useState } from 'react';
 import Bracket from './Bracket';
+import './BracketBuddy.scss'
 
 const BracketBuddy = () => {
     const [numParticipants, setNumParticipants] = useState(4);
     const [advancementMethod, setAdvancementMethod] = useState('choice');
     const [setupMode, setSetupMode] = useState(true);
-    const [participantNames, setParticipantNames] = useState(new Array(numParticipants).fill(''));
-    const [bracketProgress, setBracketProgress] = useState([]);
-  
+    const [participantNames, setParticipantNames] = useState([
+      {
+        participant1Name: '',
+        participant2Name: ''
+      },
+      {
+        participant1Name: '',
+        participant2Name: ''
+      },
+      {
+        participant1Name: '',
+        participant2Name: ''
+      },
+      {
+        participant1Name: '',
+        participant2Name: ''
+      },
+    ]);
+
     const handleNumParticipantsChange = (value) => {
       if (value >= 4 && value <= 32) {
         setNumParticipants(value);
-        setParticipantNames(new Array(value).fill(''));
-        setBracketProgress([]);
       }
+      let newNames;
+      if(value/2<participantNames.length){
+        newNames = [];
+        for (let i=0; i < value/2; i++){
+          newNames[i] = {
+            participant1Name: '',
+            participant2Name: ''
+          }
+        }
+      } else {
+        newNames = participantNames;
+        for (let i=participantNames.length; i < value/2; i++){
+          newNames[i] = {
+            participant1Name: '',
+            participant2Name: ''
+          }
+        }
+      }
+
+
+      setParticipantNames(newNames);
     };
   
     const handleAdvancementMethodChange = (method) => {
@@ -23,23 +59,17 @@ const BracketBuddy = () => {
     const handleSetupModeChange = () => {
       setSetupMode(!setupMode);
       if (!setupMode) {
-        setBracketProgress([]);
+        //reset bracket other than team names
       }
     };
-  
-    const handleNameChange = (index, newName) => {
-      const updatedNames = [...participantNames];
-      updatedNames[index] = newName;
-      setParticipantNames(updatedNames);
+
+    const updateName = (matchIndex, index, name) => {
+      const newNames = participantNames;
+      if(index === 0) newNames[matchIndex].participant1Name = name;
+      else newNames[matchIndex].participant2Name = name;
+      setParticipantNames(newNames);
     };
-  
-    const handleAdvance = (round, winnerIndex) => {
-      if (setupMode) {
-        const newBracketProgress = [...bracketProgress, { round, winnerIndex }];
-        setBracketProgress(newBracketProgress);
-      }
-    };
-  
+
     const generateBracketStructure = (numParticipants) => {
       const bracketStructure = [];
   
@@ -52,7 +82,7 @@ const BracketBuddy = () => {
       // Generate rounds and matches
       for (let round = 0; round < numRounds; round++) {
         const roundMatches = [];
-        let numMatchesInRound
+        let numMatchesInRound;
 
         // Calculate the number of matches in this round
         if(temp%Math.pow(2, numRounds-1)===0){
@@ -61,15 +91,18 @@ const BracketBuddy = () => {
             numMatchesInRound = temp%Math.pow(2, numRounds-1);
             temp -= temp%Math.pow(2, numRounds-1);
         }
-        
         // Generate matches
         for (let matchIndex = 0; matchIndex < numMatchesInRound; matchIndex++) {
-          const match = {
-            participant1Index: null,
-            participant2Index: null,
+          let match = {
+            participant1Name: '',
+            participant2Name: '',
             matchNum: matchNum,
-            winnerIndex: null
+            winnerName: null
           };
+          if(participantNames.length>0 && round === 0){
+            match.participant1Name = participantNames[matchIndex].participant1Name
+            match.participant2Name = participantNames[matchIndex].participant2Name
+          }
           roundMatches.push(match);
           matchNum--;
         }
@@ -82,13 +115,11 @@ const BracketBuddy = () => {
   
     const bracketStructure = generateBracketStructure(numParticipants);
 
-    console.log(bracketProgress);
-  
     return (
       <div>
         <div>
           <label>Number of Participants:</label>
-          <input type="number" value={numParticipants} onChange={(e) => handleNumParticipantsChange(parseInt(e.target.value))} min={4} max={32} />
+          {/* <input type="number" value={numParticipants} onChange={(e) => handleNumParticipantsChange(parseInt(e.target.value))} min={4} max={32} /> */}
           <input type="radio" id="4" name="numParticipants" value='4' checked={numParticipants === 4} onChange={() => handleNumParticipantsChange(4)} />
           <label htmlFor="4">4</label>
           <input type="radio" id="8" name="numParticipants" value='8' checked={numParticipants === 8} onChange={() => handleNumParticipantsChange(8)} />
@@ -104,8 +135,10 @@ const BracketBuddy = () => {
           <div>
             <input type="radio" id="byChoice" name="advancementMethod" value="choice" checked={advancementMethod === 'choice'} onChange={() => handleAdvancementMethodChange('choice')} />
             <label htmlFor="byChoice">By Choice</label>
-            <input type="radio" id="byScore" name="advancementMethod" value="score" checked={advancementMethod === 'score'} onChange={() => handleAdvancementMethodChange('score')} />
-            <label htmlFor="byScore">By Score</label>
+            <input type="radio" id="byChoice" name="advancementMethod" value="picture" checked={advancementMethod === 'picture'} onChange={() => handleAdvancementMethodChange('picture')} />
+            <label htmlFor="byChoice">By Picture</label>
+            {/* <input type="radio" id="byScore" name="advancementMethod" value="score" checked={advancementMethod === 'score'} onChange={() => handleAdvancementMethodChange('score')} />
+            <label htmlFor="byScore">By Score</label> */}
           </div>
         </div>
   
@@ -113,15 +146,15 @@ const BracketBuddy = () => {
           <input type="checkbox" id="setupMode" checked={setupMode} onChange={handleSetupModeChange} />
           <label htmlFor="setupMode">Setup Mode</label>
         </div>
-
-        <Bracket
-          structure={bracketStructure}
-          participantNames={participantNames}
-          onNameChange={handleNameChange}
-          onAdvance={handleAdvance}
-          setupMode={setupMode}
-          bracketProgress={bracketProgress}
-        />
+        <div className='bracket-container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}> 
+          <Bracket
+            structure={bracketStructure}
+            advanceType={advancementMethod}
+            setupMode={setupMode}
+            updateName={updateName}
+          />
+        </div>
+        <p className='version-number'>Bracket Buddy V0.1</p>
       </div>
     );
   };

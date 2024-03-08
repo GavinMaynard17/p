@@ -1,8 +1,37 @@
 .outer-box {
-    width: 200px;
+    width: 175px;
 }
 
-.team-1 {
+.matchup-container {
+    position: relative;
+}
+
+.to-line {
+    position: absolute;
+    top: 49%;
+    left: calc(100% + 1px); /* adjust the distance from the right side */
+    height: 1px; /* or whatever height you want */
+    width: 30px; /* length of the line */
+    background-color: black; /* color of the line */
+}
+
+.from-line {
+    position: absolute;
+    top: 50%;
+    right: 100%; /* adjust the distance from the right side */
+    height: 1px; /* or whatever height you want */
+    width: 30px; /* length of the line */
+    background-color: black; /* color of the line */
+}
+
+.vert-line {
+    position: absolute;
+    left: calc(100% + 30px); /* adjust the distance from the right side */
+    width: 1px; /* length of the line */
+    background-color: black; /* color of the line */
+}
+
+.participant-1 {
     border: 1px solid black;
     border-bottom: none;
     display: flex;
@@ -11,7 +40,7 @@
     margin: 0;
 }
 
-.team-2 {
+.participant-2 {
     border: 1px solid black;
     display: flex;
     height: 25px;
@@ -19,19 +48,58 @@
     margin: 0;
 }
 
-.team-input,
-.team-name {
+.participant-input,
+.participant-name {
     height: 23px;
     width: 150px;
     margin: 0;
     border: none;
     font-size: medium;
     background-color: transparent;
+    text-align: start;
+    padding-left: 3px;
     color: black;
 }
 
-.team-input.disabled,
-.team-name.disabled {
+.participant-input.disabled,
+.participant-name.disabled {
     background-color: #f2f2f2; /* Light gray background */
     color: #888; /* Gray text color */
+}
+
+.camera-container {
+    // position: relative;
+    // width: 25px;
+    // height: 18px;
+    margin-top: 4px;
+    margin-left: -7px;
+}
+
+.camera-flash {
+    width: 6px;
+    height: 2.5px;
+    background-color: lightgray;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.camera-body {
+    width: 23px;
+    height: 17px;
+    margin-top: -2px;
+    border-radius: 3px;
+    background-color: lightgray;
+    position: relative;
+}
+
+.camera-lens {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

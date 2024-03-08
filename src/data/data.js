@@ -181,65 +181,65 @@ export const images = [
     '/esportscopy.png'
 ];
 
-export const teamFrom = [
+export const participantFrom = [
     {
-        team1From: 3,
-        team2From: 2
+        participant1From: 3,
+        participant2From: 2
     },//1
     {
-        team1From: 5,
-        team2From: 4
+        participant1From: 5,
+        participant2From: 4
     },//2
     {
-        team1From: 7,
-        team2From: 6
+        participant1From: 7,
+        participant2From: 6
     },//3
     {
-        team1From: 9,
-        team2From: 8
+        participant1From: 9,
+        participant2From: 8
     },//4
     {
-        team1From: 11,
-        team2From: 10
+        participant1From: 11,
+        participant2From: 10
     },//5
     {
-        team1From: 13,
-        team2From: 12
+        participant1From: 13,
+        participant2From: 12
     },//6
     {
-        team1From: 15,
-        team2From: 14
+        participant1From: 15,
+        participant2From: 14
     },//7
     {
-        team1From: 17,
-        team2From: 16
+        participant1From: 17,
+        participant2From: 16
     },//8
     {
-        team1From: 19,
-        team2From: 18
+        participant1From: 19,
+        participant2From: 18
     },//9
     {
-        team1From: 21,
-        team2From: 20
+        participant1From: 21,
+        participant2From: 20
     },//10
     {
-        team1From: 23,
-        team2From: 22
+        participant1From: 23,
+        participant2From: 22
     },//11
     {
-        team1From: 25,
-        team2From: 24
+        participant1From: 25,
+        participant2From: 24
     },//12
     {
-        team1From: 27,
-        team2From: 26
+        participant1From: 27,
+        participant2From: 26
     },//13
     {
-        team1From: 29,
-        team2From: 28
+        participant1From: 29,
+        participant2From: 28
     },//14
     {
-        team1From: 31,
-        team2From: 30
+        participant1From: 31,
+        participant2From: 30
     },//15
 ]
