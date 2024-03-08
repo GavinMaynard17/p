@@ -82,7 +82,7 @@ const Navbar = () => {
         {/* Conditional Rendering for Nav Links */}
         {!isMenuOpen && (
           <div className="nav-links">
-            {['/', '/about', '/projects', '/contact'].map((path, index) => (
+            {['/', '/about', '/projects', '/apps', '/contact'].map((path, index) => (
               <NavLink
                 key={path}
                 to={path}
