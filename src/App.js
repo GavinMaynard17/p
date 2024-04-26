@@ -6,6 +6,7 @@ import Projects from './pages/projects/Projects';
 import ProjectDetails from './pages/project-details/ProjectDetails';
 import Contact from './pages/contact/Contact';
 import Apps from './pages/apps/Apps';
+import Test from './pages/testing/Test';
 import BracketBuddy from './pages/apps/bracket-buddy/BracketBuddy';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
@@ -22,6 +23,7 @@ function App() {
           <Route path="projects/:key" element={<ProjectDetails/>} />
           <Route path="contact" element={<Contact/>} />
           <Route path="apps" element={<Apps/>} />
+          <Route path='testingoverlay' element={<Test/>}/>
 
           {/* app links */}
 
